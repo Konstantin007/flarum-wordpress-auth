@@ -1,2 +1,4 @@
 js/forum/node_modules/
+js/admin/node_modules/
 js/forum/Gulpfile.js
+js/admin/Gulpfile.js

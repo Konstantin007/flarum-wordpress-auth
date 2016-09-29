@@ -13,7 +13,16 @@ class AddClientAssets {
 
 	public function addAssets(ConfigureClientView $event) {
 		if ($event->isForum()) {
-			$event->addAssets([__DIR__.'/../../js/forum/dist/extension.js']);
+			$event->addAssets([
+				__DIR__.'/../../js/forum/dist/extension.js',
+				__DIR__.'/../../less/forum/extension.less',
+			]);
+			$event->addBootstrapper('arma/auth-wordpress/main');
+		}
+		if ($event->isAdmin()) {
+			$event->addAssets([
+				__DIR__.'/../../js/admin/dist/extension.js'
+			]);
 			$event->addBootstrapper('arma/auth-wordpress/main');
 		}
 	}
