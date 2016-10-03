@@ -1,18 +1,20 @@
-System.register('arma/auth-wordpress/components/WordpressSettingsModal', ['flarum/components/SettingsModal'], function (_export) {
-  'use strict';
+'use strict';
+
+System.register('arma/auth-wordpress/components/WordpressSettingsModal', ['flarum/components/SettingsModal'], function (_export, _context) {
+  "use strict";
 
   var SettingsModal, WordpressSettingsModal;
   return {
     setters: [function (_flarumComponentsSettingsModal) {
-      SettingsModal = _flarumComponentsSettingsModal['default'];
+      SettingsModal = _flarumComponentsSettingsModal.default;
     }],
     execute: function () {
-      WordpressSettingsModal = (function (_SettingsModal) {
+      WordpressSettingsModal = function (_SettingsModal) {
         babelHelpers.inherits(WordpressSettingsModal, _SettingsModal);
 
         function WordpressSettingsModal() {
           babelHelpers.classCallCheck(this, WordpressSettingsModal);
-          babelHelpers.get(Object.getPrototypeOf(WordpressSettingsModal.prototype), 'constructor', this).apply(this, arguments);
+          return babelHelpers.possibleConstructorReturn(this, (WordpressSettingsModal.__proto__ || Object.getPrototypeOf(WordpressSettingsModal)).apply(this, arguments));
         }
 
         babelHelpers.createClass(WordpressSettingsModal, [{
@@ -50,21 +52,23 @@ System.register('arma/auth-wordpress/components/WordpressSettingsModal', ['flaru
           }
         }]);
         return WordpressSettingsModal;
-      })(SettingsModal);
+      }(SettingsModal);
 
       _export('default', WordpressSettingsModal);
     }
   };
 });;
-System.register('arma/auth-wordpress/main', ['flarum/app', 'arma/auth-wordpress/components/WordpressSettingsModal'], function (_export) {
-  'use strict';
+'use strict';
+
+System.register('arma/auth-wordpress/main', ['flarum/app', 'arma/auth-wordpress/components/WordpressSettingsModal'], function (_export, _context) {
+  "use strict";
 
   var app, WordpressSettingsModal;
   return {
     setters: [function (_flarumApp) {
-      app = _flarumApp['default'];
+      app = _flarumApp.default;
     }, function (_armaAuthWordpressComponentsWordpressSettingsModal) {
-      WordpressSettingsModal = _armaAuthWordpressComponentsWordpressSettingsModal['default'];
+      WordpressSettingsModal = _armaAuthWordpressComponentsWordpressSettingsModal.default;
     }],
     execute: function () {
 
