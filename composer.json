@@ -1,6 +1,6 @@
 {
     "name": "arma/flarum-wordpress-auth",
-    "description": "Allow users to log in with Twitter.",
+    "description": "Allow users to log in with Wordpress.",
     "type": "flarum-extension",
     "keywords": ["authentication"],
     "license": "MIT",
