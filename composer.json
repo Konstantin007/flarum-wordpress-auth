@@ -1,6 +1,6 @@
 {
     "name": "arma/flarum-wordpress-auth",
-    "description": "Say hello to the world!",
+    "description": "Allow users to log in with Twitter.",
     "type": "flarum-extension",
     "keywords": ["authentication"],
     "license": "MIT",
@@ -10,8 +10,13 @@
             "email": "arslan92@mail.ru"
         }
     ],
+    "support": {
+        "issues": "https://github.com/Konstantin007/flarum-wordpress-auth/issues",
+        "source": "https://github.com/Konstantin007/flarum-wordpress-auth"
+    },
     "require": {
-        "flarum/core": "^0.1.0-beta.3"
+        "flarum/core": "^0.1.0-beta.5",
+        "league/oauth1-client": "^1.6"
     },
     "extra": {
         "branch-alias": {

@@ -6,7 +6,6 @@ use Flarum\Http\Controller\ControllerInterface;
 use Flarum\Forum\AuthenticationResponseFactory;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Zend\Diactoros\Response\RedirectResponse;
 use Arma\Auth\Wordpress\Server\Wordpress;
 
 class WordpressAuthController implements ControllerInterface {
@@ -17,17 +16,23 @@ class WordpressAuthController implements ControllerInterface {
 
 	public function __construct(AuthenticationResponseFactory $authResponse, SettingsRepositoryInterface $settings) {
 		$this->authResponse = $authResponse;
-		$this->settings = $settings;
+        $this->settings = $settings;
 	}
 
-	public function handle(Request $request) {
+	public function handle(Request $request, array $routeParams = []) {
 		$redirectUri = (string) $request->getAttribute('originalUri', $request->getUri())->withQuery('');
 
+		//server class (wordpress site)
+        /*
+        * $this->settings->get('arma-auth-wordpress.app_id')
+        * $this->settings->get('arma-auth-wordpress.app_secret')
+        * $this->settings->get('arma-auth-wordpress.wp_site_url')
+        */
 		$server = new Wordpress([
-			'identifier' => '9FkG0vl5qR14',//$this->settings->get('arma-auth-wordpress.client_key'),
-			'secret' => 'IoxoZAHhDW3zAjIY8Mf2Xp5TnnligWUmB7WFnOzmExrNSDdE',//$this->settings->get('arma-auth-wordpress.client_secret'),
+			'identifier' => '9FkG0vl5qR14',
+			'secret' => 'fZXTmwoq9nR8XanCUEXrdzACNyw5nQUY99a7igzM4wl6qtX3',
 			'callbac_uri' => $redirectUri
-		]);
+		], null, $redirectUri, 'http://139.59.143.93');
 
 		$session = $request->getAttribute('session');
 		$queryParams = $request->getQueryParams();
@@ -48,14 +53,15 @@ class WordpressAuthController implements ControllerInterface {
 
 		$tokenCredentials = $server->getTokenCredentials($temporaryCredentials, $oAuthToken, $oAuthVerifier);
 
-		//TODO: log in user with user details
 		$user = $server->getUserDetails($tokenCredentials);
 
+		$identification = ['wordpress_id' => $user->uid];
 		$suggestions = [
-            'username' => $user->nickname
+            'username' => $user->nickname,
+            'avatarUrl' => str_replace('_normal', '', $user->imageUrl)
         ];
 
-        return $this->authResponse->make($request, $suggestions);
+        return $this->authResponse->make($request, $identification, $suggestions);
 	}
 
 }
